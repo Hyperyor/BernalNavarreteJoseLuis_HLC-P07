@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-feb-2020 0:32:37 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entidades.Escribe" table="ESCRIBE" schema="USUARIO" optimistic-lock="version">
+        <composite-id name="id" class="entidades.EscribeId">
+            <key-property name="isbn" type="string">
+                <column name="ISBN" length="13" />
+            </key-property>
+            <key-property name="codigoAutor" type="int">
+                <column name="CODIGO_AUTOR" />
+            </key-property>
+            <key-property name="numero" type="int">
+                <column name="NUMERO" />
+            </key-property>
+        </composite-id>
+        <property name="beneficioAutor" type="java.lang.Float">
+            <column name="BENEFICIO_AUTOR" precision="23" scale="0" />
+        </property>
+    </class>
+</hibernate-mapping>
