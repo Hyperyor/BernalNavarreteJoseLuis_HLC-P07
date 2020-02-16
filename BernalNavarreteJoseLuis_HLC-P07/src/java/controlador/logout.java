@@ -5,23 +5,22 @@
  */
 package controlador;
 
-import data.BrokerCuenta;
-import entidades.Cuenta;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Hyperior
  */
-@WebServlet(name = "consultaLogin", urlPatterns = {"/consultaLogin"})
-public class consultaLogin extends HttpServlet {
+@WebServlet(name = "logout", urlPatterns = {"/logout"})
+public class logout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,7 +33,14 @@ public class consultaLogin extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.removeAttribute("resultado");
 
+            RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,9 +53,9 @@ public class consultaLogin extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     /**
@@ -61,34 +67,9 @@ public class consultaLogin extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String user = req.getParameter("user");
-        String pass = req.getParameter("pass");
-
-        String url = "login.jsp";
-
-        BrokerCuenta broker = new BrokerCuenta();
-
-        List<Cuenta> cuenta = broker.getCuenta(user, pass);
-
-        if (cuenta.isEmpty()) {
-            req.getSession().setAttribute("inicio", 0);
-            //System.out.println("\n esta vacio");
-        } else {
-            req.getSession().setAttribute("inicio", 1);
-
-            Cuenta c = cuenta.get(0);
-
-            req.getSession().setAttribute("user", c);
-
-            url = "home.jsp";
-        }
-
-        //req.getSession().setAttribute("resultado", cuenta);
-        //req.setAttribute("resultado", cuenta);
-        //System.out.println("\nredireccionamos");
-        req.getRequestDispatcher(url).forward(req, resp);
+        processRequest(request, response);
     }
 
     /**

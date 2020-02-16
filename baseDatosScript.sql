@@ -28,7 +28,7 @@ CREATE TABLE libro (
 	nif_autor_principal varchar(9),
 	propietario VARCHAR(25) NOT NULL,
     PRIMARY KEY (ISBN),
-	FOREIGN KEY (propietario) REFERENCES cuenta(usuario) on delete cascade on update cascade
+	FOREIGN KEY (propietario) REFERENCES cuenta(usuario) on delete cascade on update restrict
 );
 
 insert into libro values('8422616335', 'The Lord of the rings', 'imagenes/8422616335.jpg', '1954-07-09', 7.40, '27668390B', 'usuario1');
@@ -41,8 +41,8 @@ CREATE TABLE escribe (
 	codigo_autor int,
 	numero int,
 	beneficio_autor float(2),    
-	FOREIGN KEY (ISBN) REFERENCES libro(ISBN) on delete cascade on update cascade,
-	FOREIGN KEY (codigo_autor) REFERENCES autor(codigo) on delete cascade on update cascade, 
+	FOREIGN KEY (ISBN) REFERENCES libro(ISBN) on delete cascade on update restrict,
+	FOREIGN KEY (codigo_autor) REFERENCES autor(codigo) on delete cascade on update restrict, 
 	PRIMARY KEY (ISBN, codigo_autor, numero) 
 );
 

@@ -67,7 +67,7 @@
         </section>
 
         <%
-            List<Cuenta> data = (List<Cuenta>) session.getAttribute("resultado");
+            /*List<Cuenta> data = (List<Cuenta>) session.getAttribute("resultado");
 
             if (data != null) {
                 for (int i = 0; i < data.size(); i++) {
@@ -80,8 +80,7 @@
             } else {
 
                 System.out.println("\nEs nulo");
-            }
-
+            }*/
 
         %>
     </body>
