@@ -16,7 +16,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/alta.css">
-        <title>JSP Page</title>
+        <title>Login</title>
     </head>
     <body>
         <%! int correcto;%>
@@ -48,15 +48,14 @@
 
                                 </div>
                                 <div class="md-form">
-                                    <i class="fa fa-id-card prefix grey-text"></i>
-                                    <input id="pass" type="text" name="pass" class="form-control" placeholder="contraseña">
+                                    <i class="fa fa-key prefix grey-text"></i>
+                                    <input id="pass" type="password" name="pass" class="form-control" placeholder="contraseña">
 
                                 </div>
 
                                 <div class="text-center">
-                                    <input type="submit" value="Consultar" class="btn btn-primary"
-                                           <!--<a href="#" class="enlaceboton" onClick="comprobacion()">Enviar</a>
-                                           <!--<button class="btn btn-outline-danger btn-lg">Send</button>-->
+                                    <input type="submit" value="Consultar" class="btn btn-primary">
+       
                                 </div>
                             </form>
                             <!-- Form contact -->
@@ -65,23 +64,5 @@
                 </div>
             </div>
         </section>
-
-        <%
-            /*List<Cuenta> data = (List<Cuenta>) session.getAttribute("resultado");
-
-            if (data != null) {
-                for (int i = 0; i < data.size(); i++) {
-
-                    Cuenta c = (Cuenta) data.get(i);
-                    System.out.println("\n" + c.getUsuario());
-                    System.out.println("\n" + c.getPassword());
-                }
-
-            } else {
-
-                System.out.println("\nEs nulo");
-            }*/
-
-        %>
     </body>
 </html>
