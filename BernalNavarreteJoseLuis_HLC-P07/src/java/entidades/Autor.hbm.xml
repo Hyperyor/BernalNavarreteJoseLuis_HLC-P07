@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19-feb-2020 19:21:04 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entidades.Autor" table="AUTOR" schema="USUARIO" optimistic-lock="version">
+        <id name="codigo" type="int">
+            <column name="CODIGO" />
+            <generator class="assigned" />
+        </id>
+        <property name="porcentajeBeneficio" type="java.lang.Float">
+            <column name="PORCENTAJE_BENEFICIO" precision="23" scale="0" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="NOMBRE" length="25" />
+        </property>
+    </class>
+</hibernate-mapping>

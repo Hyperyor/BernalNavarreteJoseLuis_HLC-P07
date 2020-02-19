@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 19-feb-2020 19:21:04 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="entidades.Libro" table="LIBRO" schema="USUARIO" optimistic-lock="version">
+        <id name="isbn" type="string">
+            <column name="ISBN" length="13" />
+            <generator class="assigned" />
+        </id>
+        <property name="titulo" type="string">
+            <column name="TITULO" length="100" />
+        </property>
+        <property name="portada" type="string">
+            <column name="PORTADA" length="100" />
+        </property>
+        <property name="fechaPublicacion" type="date">
+            <column name="FECHA_PUBLICACION" length="10" />
+        </property>
+        <property name="precio" type="java.lang.Float">
+            <column name="PRECIO" precision="23" scale="0" />
+        </property>
+        <property name="nifAutorPrincipal" type="string">
+            <column name="NIF_AUTOR_PRINCIPAL" length="9" />
+        </property>
+        <property name="propietario" type="string">
+            <column name="PROPIETARIO" length="25" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
