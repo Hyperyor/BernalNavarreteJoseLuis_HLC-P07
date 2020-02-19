@@ -76,10 +76,10 @@
                             cont++;
                             %>
                             <article>
-                                <div class="col-lg-3 col-md-3 col-sm-12 item">
+                                <div class="item">
                                     <img src="<%= libros.get(i).getPortada()%>" class="img-fluid" alt="<%= libros.get(i).getTitulo() %>">
                                     <div class="des">
-                                        <a href=""><%= libros.get(i).getTitulo() %></a>
+                                        <a href="consultasEscribe?p=0"><%= libros.get(i).getTitulo() %></a>
                                         <span class="font-weight-bold"> <%= date.getYear() %> </span>
                                     </div>
 
@@ -123,7 +123,7 @@
                             %>
                             <article>
 
-                                <div class="col-lg-3 col-md-3 col-sm-12 item">
+                                <div class=" item">
                                     <img src="<%= libros.get(i).getPortada()%>" class="img-fluid" alt="<%= libros.get(i).getTitulo() %>" >
                                     <div class="des">
                                         <a href=""><%= libros.get(i).getTitulo() %></a>
@@ -175,7 +175,7 @@
                                 %>
                                 <article>
 
-                                    <div class="col-lg-3 col-md-3 col-sm-12 item">
+                                    <div class=" item">
                                         <img src="<%= libros.get(i).getPortada()%>" class="img-fluid" alt="<%= libros.get(i).getTitulo() %>" >
                                         <div class="des">
                                             <a href=""><%= libros.get(i).getTitulo() %></a>

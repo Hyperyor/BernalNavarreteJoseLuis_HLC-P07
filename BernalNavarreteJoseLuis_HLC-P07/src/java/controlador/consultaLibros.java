@@ -52,11 +52,22 @@ public class consultaLibros extends HttpServlet {
         
             anio = "" + request.getParameter("anio").toString();
             
-            orden = request.getParameter("orden").toString();
+           
         }
         catch(Exception Ex)
         {
             anio = null;
+
+        }
+        
+        try
+        {
+        
+            
+            orden = request.getParameter("orden").toString();
+        }
+        catch(Exception Ex)
+        {
             orden = "Descendente";
         }
         
@@ -92,7 +103,7 @@ public class consultaLibros extends HttpServlet {
         }
         else
         {
-
+            
             List<Libro> libros = broker.getBooksByYear(anio, user, orden);
 
             request.setAttribute("libros", libros);
