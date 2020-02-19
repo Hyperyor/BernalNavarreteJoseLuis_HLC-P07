@@ -43,20 +43,60 @@ public class consultaLibros extends HttpServlet {
 
         BrokerLibros broker = new BrokerLibros();
 
-        int n = 0;
-
-        try {
-            n = Integer.parseInt(request.getAttribute("anio").toString());
-        } catch (Exception ex) {
-            n = 0;
+        String anio = "0";
+        
+        String orden = "Descendente";
+        
+        try
+        {
+        
+            anio = "" + request.getParameter("anio").toString();
+            
+            orden = request.getParameter("orden").toString();
+        }
+        catch(Exception Ex)
+        {
+            anio = null;
+            orden = "Descendente";
+        }
+        
+        if(orden.equals("Descendente"))
+        {
+            orden = "desc";
+        }
+        else
+        {
+            orden = "asc";
         }
 
-        if (n == 0) { //si queremos todos los libros del usuario
+//        try {
+//            System.out.println("\n" + request.getParameter("anio") );
+//            
+//            String anio = request.getAttribute("anio").toString();
+//            
+//            n = Integer.parseInt(anio);
+//            
+//            System.out.println("\n" + n);
+//        } catch (Exception ex) {
+//            System.out.println("\nAl catch");
+//            n = 0;
+//        }
 
-            List<Libro> libros = broker.getAllBooks(user);
+        if (anio == null || anio.equals("")) { //si queremos todos los libros del usuario
+
+            List<Libro> libros = broker.getAllBooks(user, orden);
 
             request.setAttribute("libros", libros);
+            request.setAttribute("filtro", "no");
 
+        }
+        else
+        {
+
+            List<Libro> libros = broker.getBooksByYear(anio, user, orden);
+
+            request.setAttribute("libros", libros);
+            request.setAttribute("filtro", "si");
         }
 
         request.getRequestDispatcher("biblioteca.jsp").forward(request, response);
