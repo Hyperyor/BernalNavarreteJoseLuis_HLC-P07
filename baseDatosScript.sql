@@ -11,13 +11,14 @@ insert into cuenta values('usuario2', 'pass');
 CREATE TABLE autor (
     codigo int NOT NULL,
     porcentaje_beneficio float(2),
+	nombre VARCHAR(25),
     PRIMARY KEY (codigo)
 );
 
-insert into autor values(123, 30);
-insert into autor values(456, 15);
-insert into autor values(789, 50.5);
-insert into autor values(012, 90);
+insert into autor values(123, 30, 'Hawkin');
+insert into autor values(456, 15, 'Tolkien');
+insert into autor values(789, 50.5, 'Sanderson');
+insert into autor values(012, 90, 'Sapkowski');
 
 CREATE TABLE libro (
     ISBN VARCHAR(13) NOT NULL,
