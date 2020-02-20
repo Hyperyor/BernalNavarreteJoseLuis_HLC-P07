@@ -46,4 +46,25 @@ public class BrokerEscribe {
         return listaAutor;
     }
     
+    public void insertElement(Escribe es)
+    {
+        Transaction tx = this.session.beginTransaction();
+
+        try {
+            System.out.println("\nInsertamos");
+            session.save(es);
+            System.out.println("\nHemos insertado");
+            //Query query = session.createQuery("from entidades.Cuenta as cuenta where cuenta.usuario = " + usuario);
+
+            //listaAutor = (List<Escribe>) session.createQuery(hql).setString("isbn", isbn).list();
+
+            tx.commit();
+        } catch (HibernateException Ex) {
+
+            System.out.println("\nsalta por el catch");
+            Ex.printStackTrace();
+            tx.rollback();
+        }
+    }
+    
 }

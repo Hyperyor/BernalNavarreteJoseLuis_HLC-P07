@@ -5,8 +5,10 @@
  */
 package controlador;
 
+import com.google.gson.Gson;
 import data.BrokerEscribe;
 import entidades.Escribe;
+import entidades.EscribeId;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -15,18 +17,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.google.*;
-import com.google.gson.Gson;
-import data.BrokerAutor;
-import entidades.Autor;
-import java.util.ArrayList;
 
 /**
  *
  * @author alumno
  */
-@WebServlet(name = "consultasEscribe", urlPatterns = {"/consultasEscribe"})
-public class consultasEscribe extends HttpServlet {
+@WebServlet(name = "insertarAutor", urlPatterns = {"/insertarAutor"})
+public class insertarAutor extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,40 +37,42 @@ public class consultasEscribe extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        BrokerEscribe broker;
         try
         {
-            
             String isbn = request.getParameter("isbn");
             
-            BrokerEscribe broker = new BrokerEscribe();
+            broker = new BrokerEscribe();
+            
+            Escribe es = new Escribe();
+            
+            EscribeId id = new EscribeId();
+            
+            id.setCodigoAutor(456);
+            
+            id.setIsbn(isbn);
+            
+            id.setNumero(3);
+            
+            es.setId(id);
+            
+            es.setBeneficioAutor(80.0f);
+            
+            broker.insertElement(es);
+            
+            broker = new BrokerEscribe();
             
             List<Escribe> listado = broker.getAllData(isbn);
             
             Gson jsonEscritores = new Gson();
 
             request.setAttribute("autores", jsonEscritores.toJsonTree(listado));
+            
+            request.setAttribute("isbn", isbn);
 
 //            for (int i = 0; i < listado.size(); i++) {
 //                System.out.println("\n" + listado.get(i).getId().getCodigoAutor());
 //            }
-
-            BrokerAutor bokerAutor = new BrokerAutor();
-            
-            List<Autor> listaAutoresNoParticipantes = bokerAutor.getAllAutores();
-            
-            for (int i = 0; i < listado.size(); i++) {
-                
-                for (int j = 0; j < listaAutoresNoParticipantes.size(); j++) {
-                    
-                    if(listaAutoresNoParticipantes.get(j).getCodigo() == listado.get(i).getId().getCodigoAutor())
-                    {
-                        listaAutoresNoParticipantes.remove(j);
-                        break;
-                    }
-                }
-            }
-            
-            request.setAttribute("noParticipantes", listaAutoresNoParticipantes);
             
         }
         catch(Exception ex)

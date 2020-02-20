@@ -5,7 +5,6 @@
  */
 package controlador;
 
-import data.BrokerEscribe;
 import entidades.Escribe;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,18 +14,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.google.*;
-import com.google.gson.Gson;
-import data.BrokerAutor;
-import entidades.Autor;
-import java.util.ArrayList;
 
 /**
  *
  * @author alumno
  */
-@WebServlet(name = "consultasEscribe", urlPatterns = {"/consultasEscribe"})
-public class consultasEscribe extends HttpServlet {
+@WebServlet(name = "prepararInsercion", urlPatterns = {"/prepararInsercion"})
+public class prepararInsercion extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,49 +33,13 @@ public class consultasEscribe extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String isbn = request.getParameter("isbn");
         
-        try
-        {
-            
-            String isbn = request.getParameter("isbn");
-            
-            BrokerEscribe broker = new BrokerEscribe();
-            
-            List<Escribe> listado = broker.getAllData(isbn);
-            
-            Gson jsonEscritores = new Gson();
-
-            request.setAttribute("autores", jsonEscritores.toJsonTree(listado));
-
-//            for (int i = 0; i < listado.size(); i++) {
-//                System.out.println("\n" + listado.get(i).getId().getCodigoAutor());
-//            }
-
-            BrokerAutor bokerAutor = new BrokerAutor();
-            
-            List<Autor> listaAutoresNoParticipantes = bokerAutor.getAllAutores();
-            
-            for (int i = 0; i < listado.size(); i++) {
-                
-                for (int j = 0; j < listaAutoresNoParticipantes.size(); j++) {
-                    
-                    if(listaAutoresNoParticipantes.get(j).getCodigo() == listado.get(i).getId().getCodigoAutor())
-                    {
-                        listaAutoresNoParticipantes.remove(j);
-                        break;
-                    }
-                }
-            }
-            
-            request.setAttribute("noParticipantes", listaAutoresNoParticipantes);
-            
-        }
-        catch(Exception ex)
-        {
-            
-        }
+        List<Escribe> listado = (List<Escribe>) request.getAttribute("autores");
         
-        request.getRequestDispatcher("escritores.jsp").forward(request, response);
+        for (int i = 0; i < listado.size(); i++) {
+            System.out.println("\n" + listado.get(i).getId().getCodigoAutor());
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
