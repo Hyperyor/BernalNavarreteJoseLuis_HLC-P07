@@ -19,11 +19,13 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <title>Biblioteca</title>
     </head>
-    <body>
+    <body >
         <header>
             <jsp:include page="navbar.jsp"></jsp:include>
             
         </header>
+        
+        <section class="container">
         <section class="contenedor">
             <br/>
             <br/>
@@ -60,7 +62,7 @@
                     {
 
                         %>
-
+                        <!-------------------------------------------Clásicos------------------------------------------>
                         <section class="team">
                             <h1 class="text-center">Clásicos</h1> 
                             <div class="row  h-100 justify-content-center align-items-center"> 
@@ -79,7 +81,7 @@
                                 %>
                                 <article>
                                     <div class="item">
-                                        <img src="<%= libros.get(i).getPortada()%>" class="img-fluid" alt="<%= libros.get(i).getTitulo() %>">
+                                        <img src="<%= libros.get(i).getPortada()%>" class="img-fluid rounded mx-auto d-block w-50 p-3" alt="<%= libros.get(i).getTitulo() %>">
                                         <div class="des">
                                             <a href=<%= url %>><%= libros.get(i).getTitulo() %></a>
                                             <span class="font-weight-bold"> <%= date.getYear() %> </span>
@@ -106,6 +108,8 @@
                                 </article>
                             </div>
                         </section>
+                                
+                        <!-------------------------------------------Modernos------------------------------------------>
 
                         <section class="team">
                             <h1 class="text-center">Modernos</h1> 
@@ -127,7 +131,7 @@
                                 <article>
 
                                     <div class=" item">
-                                        <img src="<%= libros.get(i).getPortada()%>" class="img-fluid" alt="<%= libros.get(i).getTitulo() %>" >
+                                        <img src="<%= libros.get(i).getPortada()%>" class="img-fluid rounded mx-auto d-block w-50 p-3" alt="<%= libros.get(i).getTitulo() %>" >
                                         <div class="des">
                                             <a href=<%= url %>> <%= libros.get(i).getTitulo() %></a>
                                             <span class="font-weight-bold"> <%= date.getYear() %> </span>
@@ -154,7 +158,7 @@
                         </section>
 
 
-
+                        <!-------------------------------------------Filtrados------------------------------------------>
                         <%
                     }
                     else //si estamos mostrando datos filtrados (de un unico año)
@@ -180,7 +184,7 @@
                                     <article>
 
                                         <div class=" item">
-                                            <img src="<%= libros.get(i).getPortada()%>" class="img-fluid" alt="<%= libros.get(i).getTitulo() %>" >
+                                            <img src="<%= libros.get(i).getPortada()%>" class="img-fluid rounded mx-auto d-block w-50 p-3" alt="<%= libros.get(i).getTitulo() %>" >
                                             <div class="des">
                                                 <a href=<%= url %>><%= libros.get(i).getTitulo() %></a>
                                                 <span class="font-weight-bold"> <%= date.getYear() %> </span>
@@ -203,6 +207,7 @@
 
                 %>
             </section>
+        </section>
         </section>
     </body>
 </html>

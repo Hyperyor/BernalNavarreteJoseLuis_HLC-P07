@@ -30,7 +30,7 @@ public class BrokerEscribe {
 
         try {
 
-            String hql = "from entidades.Escribe as escribe where escribe.id.isbn = :isbn";
+            String hql = "from entidades.Escribe as escribe where escribe.id.isbn = :isbn order by escribe.id.numero asc";
             //Query query = session.createQuery("from entidades.Cuenta as cuenta where cuenta.usuario = " + usuario);
 
             listaAutor = (List<Escribe>) session.createQuery(hql).setString("isbn", isbn).list();

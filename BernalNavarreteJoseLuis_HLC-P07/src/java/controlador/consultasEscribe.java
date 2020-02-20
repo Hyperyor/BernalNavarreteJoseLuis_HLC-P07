@@ -43,6 +43,12 @@ public class consultasEscribe extends HttpServlet {
         try
         {
             
+            if(request.getAttribute("insercion") != null)
+            {
+                request.setAttribute("insercion", request.getAttribute("insercion"));
+
+            }
+            
             String isbn = request.getParameter("isbn");
             
             BrokerEscribe broker = new BrokerEscribe();

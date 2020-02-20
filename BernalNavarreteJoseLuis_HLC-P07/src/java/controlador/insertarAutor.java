@@ -38,9 +38,45 @@ public class insertarAutor extends HttpServlet {
             throws ServletException, IOException {
         
         BrokerEscribe broker;
+        String cod;
+        int codAut = 0;
+        String isbn = "";
+        String num = "";
         try
         {
-            String isbn = request.getParameter("isbn");
+            System.out.println("\nEntramos en insertarautor");
+            
+            isbn = request.getParameter("isbn");
+            
+            
+            num = request.getParameter("cantidad");
+            
+            
+            int n = Integer.parseInt(num);
+            
+            String beneficio = request.getParameter("beneficio");
+            
+            Float f = Float.parseFloat(beneficio);
+            
+            try
+            {
+                cod = request.getParameter("codigo");
+                
+            }
+            catch(Exception Ex)
+            {
+                cod = "";
+            }
+            
+            if(!cod.equals(""))
+            {
+                codAut = Integer.parseInt(cod);
+            }
+            
+//            System.out.println("\nCodigo del autor: " + codAut);
+//            System.out.println("\nISBN del libro: " + isbn);
+//            System.out.println("\nNumero de autor que escribe el libro: " + n);
+//            System.out.println("\nBeneficio del autor: " + f);
             
             broker = new BrokerEscribe();
             
@@ -48,39 +84,31 @@ public class insertarAutor extends HttpServlet {
             
             EscribeId id = new EscribeId();
             
-            id.setCodigoAutor(456);
+            id.setCodigoAutor(codAut);
             
             id.setIsbn(isbn);
             
-            id.setNumero(3);
+            id.setNumero(n);
             
             es.setId(id);
             
-            es.setBeneficioAutor(80.0f);
+            es.setBeneficioAutor(f);
             
             broker.insertElement(es);
             
-            broker = new BrokerEscribe();
+            System.out.println("\nInsercion con exito");
             
-            List<Escribe> listado = broker.getAllData(isbn);
-            
-            Gson jsonEscritores = new Gson();
-
-            request.setAttribute("autores", jsonEscritores.toJsonTree(listado));
-            
-            request.setAttribute("isbn", isbn);
-
-//            for (int i = 0; i < listado.size(); i++) {
-//                System.out.println("\n" + listado.get(i).getId().getCodigoAutor());
-//            }
+            request.setAttribute("insercion", "correcta");
             
         }
         catch(Exception ex)
         {
+            System.out.println("\nsaltamos al catch");
             
+            request.setAttribute("insercion", "incorrecta");
         }
         
-        request.getRequestDispatcher("escritores.jsp").forward(request, response);
+        request.getRequestDispatcher("consultasEscribe?isbn=" + isbn).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

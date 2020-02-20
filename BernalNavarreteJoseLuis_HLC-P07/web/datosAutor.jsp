@@ -91,7 +91,7 @@
 
                                 </div>
                                     
-                                     <input class="btn btn-danger" type="submit" value="Modificar">  
+                                     <input class="btn btn-danger form-control" type="submit" value="Modificar">  
 
                             </form>
                             <!-- Form contact -->

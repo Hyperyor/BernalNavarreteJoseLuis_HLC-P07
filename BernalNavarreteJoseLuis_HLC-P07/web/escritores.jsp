@@ -49,8 +49,16 @@
                                 String urlInsertar;
                                 List<Autor> listadoNoParticipantes;
                                 String isbn;
+                                int cont = 0;
+                                String insercion = "";
                                 %>
                             <%
+                                cont = 0;
+                                 if(request.getAttribute("insercion") != null)
+                                {
+                                    insercion = request.getAttribute("insercion").toString();
+
+                                }
                                 
                                 listadoNoParticipantes = (List<Autor>) request.getAttribute("noParticipantes");
                                 JsonArray listaEscritores = (JsonArray)request.getAttribute("autores");
@@ -59,7 +67,7 @@
                                         autor = listaEscritores.get(i).getAsJsonObject();
 
                                         id = autor.get("id").getAsJsonObject();
-                                          
+                                        cont++;
                                         isbn = id.get("isbn").getAsString();
                                         url = "consultaAutor?codigo=" + id.get("codigoAutor").getAsString() + "&update=no" + "&isbn=" + id.get("isbn").getAsString();
                                         //System.out.println("\n" + id.get("codigoAutor").getAsString());
@@ -81,17 +89,12 @@
                         
                 <a class="btn btn-primary" href="consultaLibros" > <-- Volver </a>
             </section>
-        </section>
+        
             
             <%
-                if(listadoNoParticipantes.isEmpty())
+                if(!listadoNoParticipantes.isEmpty())
                 {
-                    %>
-                    <h1>No hay mas autores que insertar</h1>
-                    <%
-                }
-                else
-                {
+                    urlInsertar = "insertarAutor?isbn=" + isbn + "&cantidad=" + (cont + 1);
                     %>
                 <section id="formulario">
 
@@ -108,14 +111,14 @@
 
                                             <h5 class="text-center" >ISBN</h5>
                                             
-                                            <input type="text" name="nombre" value="<%= isbn %>" class="form-control" disabled="disabled">
+                                            <input type="text" name="isbnLibro" value="<%= isbn %>" class="form-control" disabled="disabled">
 
                                         </div>
                                         <div class="md-form">
                                             <br/>
                                             <h5 class="text-center" >Código del autor</h5>
                                             
-                                            <select  name="codigo" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >
+                                            <select  name="codigo" class="btn btn-secondary dropdown-toggle dropdown-toggle-split form-control" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" >
                                                 <option disabled selected>Selecciona una opción</option>
                                                 <%
                                                     for (int i = 0; i < listadoNoParticipantes.size(); i++) {
@@ -139,7 +142,27 @@
 
                                         </div>
                                              <br/>
-                                             <input class="btn btn-danger" type="submit" value="Insertar">  
+                                             <input class="btn btn-danger form-control" type="submit" value="Insertar">  
+                                             
+                                             <%
+                                                 if(!insercion.equals(""))
+                                                 {
+                                                     if(insercion.equals("correcta"))
+                                                     {
+                                                         %>
+                                                         <br/>
+                                                         <h6 class="text-center font-bold font-up danger-text" >Inserción realizada con éxito</h6>
+                                                         <%
+                                                     }
+                                                     else
+                                                     {
+                                                         %>
+                                                         <br/>
+                                                         <h6 class="text-center font-bold font-up danger-text" >Inserción incorrecta</h6>
+                                                         <%
+                                                     }
+                                                 }
+                                                 %>
 
                                     </form>
                                     <!-- Form contact -->
@@ -160,7 +183,7 @@
             
             
   
-        
+        </section>
         
     </body>
 </html>
