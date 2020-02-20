@@ -15,6 +15,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.*;
+import com.google.gson.Gson;
 
 /**
  *
@@ -44,11 +46,13 @@ public class consultasEscribe extends HttpServlet {
             
             List<Escribe> listado = broker.getAllData(isbn);
             
-            request.setAttribute("autores", listado);
+            Gson jsonEscritores = new Gson();
 
-            for (int i = 0; i < listado.size(); i++) {
-                System.out.println("\n" + listado.get(i).getId().getCodigoAutor());
-            }
+            request.setAttribute("autores", jsonEscritores.toJsonTree(listado));
+
+//            for (int i = 0; i < listado.size(); i++) {
+//                System.out.println("\n" + listado.get(i).getId().getCodigoAutor());
+//            }
             
         }
         catch(Exception ex)

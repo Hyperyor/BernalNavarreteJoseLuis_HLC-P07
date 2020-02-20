@@ -1,6 +1,16 @@
+.contenedor{
+    padding-top: 56px;
+    
+    background-image: url('../imagenes/backBooks2.jpeg');
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    
+   }
+
 .team{
-    margin: 4em 0;
-    position: relative;  
+    /*margin: 4em 0;
+    position: relative;  */
    }
    .team h1{
     color:#F97300;
@@ -10,7 +20,8 @@
     box-shadow: 5px 5px 25px #222 inset;  /* Sombra interior */
    }
    .team .item{
-    position: relative;
+    /*position: relative;*/
+    
    }
    .team .des{
     background: #F97300;
