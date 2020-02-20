@@ -56,7 +56,7 @@
 
                                         id = autor.get("id").getAsJsonObject();
                                         
-                                        url = "consultaAutor?codigo=" + id.get("codigoAutor").getAsString() + "&isbn=" + id.get("isbn").getAsString();
+                                        url = "consultaAutor?codigo=" + id.get("codigoAutor").getAsString() + "&update=no" + "&isbn=" + id.get("isbn").getAsString();
                                         //System.out.println("\n" + id.get("codigoAutor").getAsString());
                                     
                             %>

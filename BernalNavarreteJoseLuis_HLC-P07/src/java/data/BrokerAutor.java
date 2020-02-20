@@ -44,4 +44,27 @@ public class BrokerAutor {
         return listaAutor;
     }
     
+    public void updateAutor(int cod, String nombre, Float beneficio) {
+        Transaction tx = this.session.beginTransaction();
+        //List<Autor> listaAutor = null;
+        int resultado;
+        
+        try {
+
+            String hql = "update entidades.Autor as autor set autor.nombre = :name"
+                    + ", autor.porcentajeBeneficio = :ben where autor.codigo = :codigo";
+
+            resultado = session.createQuery(hql).setString("name", nombre).setFloat("ben", beneficio).setInteger("codigo", cod).executeUpdate();
+
+            tx.commit();
+        } catch (HibernateException Ex) {
+
+            System.out.println("\nsalta por el catch");
+            Ex.printStackTrace();
+            tx.rollback();
+        }
+
+        //return listaAutor;
+    }
+    
 }

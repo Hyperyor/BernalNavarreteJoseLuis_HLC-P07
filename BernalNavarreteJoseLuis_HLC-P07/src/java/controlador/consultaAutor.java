@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "consultaAutor", urlPatterns = {"/consultaAutor"})
 public class consultaAutor extends HttpServlet {
 
+    private boolean datosCorrectos;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,22 +40,69 @@ public class consultaAutor extends HttpServlet {
             throws ServletException, IOException {
         //String url = "";
         
+        
+        
         String isbn="";
         try
         {
+            
+            String update = request.getParameter("update");
             
             String codStr = request.getParameter("codigo");
             
             isbn = request.getParameter("isbn");
             
-            int cod = Integer.parseInt(codStr);
-            
             BrokerAutor broker = new BrokerAutor();
             
+            Float beneficio = 0f;
+            
+            int cod = 0;
+            
+            if(update.equals("si"))
+            {
+                String name = request.getParameter("nombre");
+                
+                String ben = request.getParameter("beneficio");
+                
+                try
+                {
+                    
+                    beneficio = Float.parseFloat(ben);
+                    
+                    comprobarDatosCorrectos(name, beneficio);
+                    
+                    cod = Integer.parseInt(codStr);
+                }
+                catch(Exception ex)
+                {
+                    
+                    datosCorrectos = false;
+                }
+                
+                if(datosCorrectos)
+                {
+                    //hacemos el update
+                    System.out.println("\nhacemos update");
+                    broker.updateAutor(cod, name, beneficio);
+                    System.out.println("\nTerminamos update");
+                    request.setAttribute("updateCorrecto", "si");
+                }
+                else
+                {
+                    request.setAttribute("updateCorrecto", "no");
+                }
+            }
+            else
+            {
+                request.setAttribute("updateCorrecto", "si");
+            }
+            broker = new BrokerAutor();
+            cod = Integer.parseInt(codStr);
+            System.out.println("\nTomamos datos");
             List<Autor> listado = broker.getAutor(cod);
             
             request.setAttribute("autor", listado.get(0));
-
+            System.out.println("\nDevolvemos d");
 //            for (int i = 0; i < listado.size(); i++) {
 //                System.out.println("\n" + listado.get(i).getId().getCodigoAutor());
 //            }
@@ -68,6 +116,19 @@ public class consultaAutor extends HttpServlet {
         request.setAttribute("isbn", isbn);
         
         request.getRequestDispatcher("datosAutor.jsp").forward(request, response);
+    }
+    
+    private void comprobarDatosCorrectos(String name, Float beneficio)
+    {
+        if(beneficio > 0 && !name.equals(""))
+        {
+            datosCorrectos = true;
+        }
+        else
+        {
+            datosCorrectos = false;
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

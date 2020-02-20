@@ -29,10 +29,32 @@
         <%!
             Autor t;
             String urlVovler;
+            String urlUpdate;
+            String updateCorrecto;
             %>
         <%
             t = (Autor) request.getAttribute("autor");
             urlVovler = "consultasEscribe?isbn=" + request.getAttribute("isbn").toString();
+            urlUpdate = "consultaAutor?codigo=" + t.getCodigo() + "&update=si" + "&isbn="+request.getAttribute("isbn").toString();
+            
+            try
+            {
+                updateCorrecto = request.getAttribute("updateCorrecto").toString();
+            }
+            catch(Exception ex)
+            {
+                updateCorrecto = "no";
+            }
+            
+            if(updateCorrecto.equals("no"))
+            {
+                %>
+                
+                <h1>Error al modificar</h1>
+                
+                <%
+                    
+            }
 
             %>
         
@@ -44,34 +66,36 @@
                     <div class="card">
                         <div class="card-body">
                             <!-- Form contact -->
-                            <form>
+                            <form method="post" action=<%= urlUpdate %>>
                                 <h2 class="text-center py-4 font-bold font-up danger-text">Datos del autor</h2>
 
                                 <div class="md-form">
 
                                     <h5 class="text-center" >Nombre</h5>
                                     <i class="fa fa-user prefix grey-text"></i>
-                                    <input type="text" value="<%= t.getNombre() %>" class="form-control" disabled="disabled">
+                                    <input type="text" name="nombre" value="<%= t.getNombre() %>" class="form-control">
 
                                 </div>
                                 <div class="md-form">
 
                                     <h5 class="text-center" >Código</h5>
                                     <i class="fa fa-barcode prefix grey-text"></i>
-                                    <input type="text" value="<%= t.getCodigo() %>" class="form-control " disabled="disabled">
+                                    <input type="text" name="codigo" value="<%= t.getCodigo() %>" class="form-control " disabled="disabled">
 
                                 </div>
                                 <div class="md-form">
 
                                     <h5 class="text-center" >Beneficio</h5>
                                     <i class="fa fa-percent prefix grey-text"></i>
-                                    <input type="text" value="<%= t.getPorcentajeBeneficio() %>" class="form-control " disabled="disabled">
+                                    <input type="text" id="beneficio" name="beneficio" value="<%= t.getPorcentajeBeneficio() %>" class="form-control ">
 
                                 </div>
+                                    
+                                     <input class="btn btn-danger" type="submit" value="Modificar">  
 
                             </form>
                             <!-- Form contact -->
-                            <h3 class="text-center"><a class="btn btn-danger" href=""> Modificar </a></h3>
+                          
                             
                         </div>
                         <a class="btn btn-primary" href= <%= urlVovler %> > <-- Volver </a>
