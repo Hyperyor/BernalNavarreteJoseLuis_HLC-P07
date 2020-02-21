@@ -21,8 +21,8 @@
     <body>
         <%! int correcto;%>
         <%
-            if (session.getAttribute("inicio") != null) {
-                correcto = Integer.parseInt(session.getAttribute("inicio").toString());
+            if (request.getAttribute("inicio") != null) {
+                correcto = Integer.parseInt(request.getAttribute("inicio").toString());
 
                 if (correcto == 0) {
 

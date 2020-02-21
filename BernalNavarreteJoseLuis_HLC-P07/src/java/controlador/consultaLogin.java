@@ -74,10 +74,10 @@ public class consultaLogin extends HttpServlet {
         List<Cuenta> cuenta = broker.getCuenta(user, pass);
 
         if (cuenta.isEmpty()) {
-            req.getSession().setAttribute("inicio", 0);
+            req.setAttribute("inicio", 0);
             //System.out.println("\n esta vacio");
         } else {
-            req.getSession().setAttribute("inicio", 1);
+            req.setAttribute("inicio", 1);
 
             Cuenta c = cuenta.get(0);
 
