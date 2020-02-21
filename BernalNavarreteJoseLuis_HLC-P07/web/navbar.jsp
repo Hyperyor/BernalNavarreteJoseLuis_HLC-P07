@@ -29,7 +29,7 @@
                         <li class="nav-item">
                             <a class="nav-link" data-value="biblioteca" href="consultaLibros">Biblioteca</a>        </li>
                         <li class="nav-item">
-                            <a class="nav-link " data-value="manual"href="">Manual hibernate</a>
+                            <a class="nav-link " data-value="manual"href="manualHibernate.jsp">Manual hibernate</a>
                         </li>
                         <li class="nav-item">
                             

@@ -5,28 +5,32 @@
  */
 package controlador;
 
-import data.BrokerEscribe;
-import entidades.Escribe;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.List;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.google.*;
-import com.google.gson.Gson;
-import data.BrokerAutor;
-import entidades.Autor;
-import java.util.ArrayList;
+import org.json.JSONObject;
+import sun.misc.IOUtils;
+import data.getJSonExterno;
+import org.json.JSONException;
 
 /**
  *
  * @author alumno
  */
-@WebServlet(name = "consultasEscribe", urlPatterns = {"/consultasEscribe"})
-public class consultasEscribe extends HttpServlet {
+@WebServlet(name = "jsonExterno", urlPatterns = {"/jsonExterno"})
+public class jsonExterno extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,55 +43,24 @@ public class consultasEscribe extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         try
         {
             
-            if(request.getAttribute("insercion") != null)
-            {
-                request.setAttribute("insercion", request.getAttribute("insercion"));
-
-            }
+        
+            String url = "http://api.ipinfodb.com/v3/ip-city/?key=d64fcfdfacc213c7ddf4ef911dfe97b55e4696be3532bf8302876c09ebd06b&ip=74.125.45.100&format=json";
+            System.out.println("\nitentamos tomar los datos");
+            getJSonExterno jsonParser = new getJSonExterno();
             
-            String isbn = request.getParameter("isbn");
+            JSONObject object = jsonParser.getJSONFromUrl(url);
+            System.out.println("\nLos hemos tomado");
+            String content=object.getString("frameworks");
             
-            BrokerEscribe broker = new BrokerEscribe();
-            
-            List<Escribe> listado = broker.getAllData(isbn);
-            
-            Gson jsonEscritores = new Gson();
-            
-            request.setAttribute("autores", jsonEscritores.toJsonTree(listado));
-
-//            for (int i = 0; i < listado.size(); i++) {
-//                System.out.println("\n" + listado.get(i).getId().getCodigoAutor());
-//            }
-
-            BrokerAutor bokerAutor = new BrokerAutor();
-            
-            List<Autor> listaAutoresNoParticipantes = bokerAutor.getAllAutores();
-            
-            for (int i = 0; i < listado.size(); i++) {
-                
-                for (int j = 0; j < listaAutoresNoParticipantes.size(); j++) {
-                    
-                    if(listaAutoresNoParticipantes.get(j).getCodigo() == listado.get(i).getId().getCodigoAutor())
-                    {
-                        listaAutoresNoParticipantes.remove(j);
-                        break;
-                    }
-                }
-            }
-            
-            request.setAttribute("noParticipantes", listaAutoresNoParticipantes);
-            
+            System.out.println(""+content);
         }
         catch(Exception ex)
         {
-            
+            System.out.println("\nha fallao tio");
         }
-        
-        request.getRequestDispatcher("escritores.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
