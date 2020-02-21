@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import beans.controlSesion;
 import data.BrokerCuenta;
 import entidades.Cuenta;
 import java.io.IOException;
@@ -81,6 +82,9 @@ public class consultaLogin extends HttpServlet {
             Cuenta c = cuenta.get(0);
 
             req.getSession().setAttribute("user", c);
+            
+            controlSesion.setId(req.getSession().getId());
+            System.out.println("\n" + req.getSession().getId());
 
             url = "home.jsp";
         }

@@ -22,7 +22,18 @@
     <body ng-controller="primerControlador">
     
             
-            
+            <jsp:useBean id="control" class="beans.controlSesion" />
+        
+            <%
+                System.out.println("\n" + control.getId());
+                System.out.println("\n" + session.getId());
+                if(control.getId() != session.getId())
+                {
+                    %>
+                    <jsp:forward page="logout"/>
+                    <%
+                }
+                %>
         
         <section class=""container">
             <div class="table-responsive">

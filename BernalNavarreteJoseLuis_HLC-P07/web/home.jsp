@@ -22,6 +22,19 @@
         <header>
             <jsp:include page="navbar.jsp"></jsp:include>
         </header>
+        
+        <jsp:useBean id="control" class="beans.controlSesion" />
+        
+            <%
+                System.out.println("\n" + control.getId());
+                System.out.println("\n" + session.getId());
+                if(control.getId() != session.getId())
+                {
+                    %>
+                    <jsp:forward page="logout"/>
+                    <%
+                }
+                %>
 
         <section class="content">
             
