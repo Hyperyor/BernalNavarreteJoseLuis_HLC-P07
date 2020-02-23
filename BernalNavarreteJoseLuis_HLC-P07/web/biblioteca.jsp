@@ -112,7 +112,7 @@
                         if(cont == 0)
                         {
                             %>
-                            <h2>No existen libros en esta categoria :(</h2>
+                            <h2 class="text-center py-4 font-bold font-up danger-text">No existen libros en esta categoría para este usuario</h2>
                             <%
 
                         }
@@ -160,7 +160,7 @@
                         if(cont == 0)
                         {
                             %>
-                            <h2>No existen libros en esta categoria :(</h2>
+                            <h2 class="text-center py-4 font-bold font-up danger-text">No existen libros en esta categoría para este usuario</h2>
                             <%
 
                         }
@@ -179,7 +179,7 @@
                         if(libros.isEmpty())
                         {
                             %>
-                            <h2>No existen libros en esta categoria :(</h2>
+                            <h2 class="text-center py-4 font-bold font-up danger-text">No existen libros en esta categoría para este usuario</h2>
                             <%
                         }
                         else

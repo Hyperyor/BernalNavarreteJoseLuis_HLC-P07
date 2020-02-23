@@ -20,17 +20,7 @@
     </head>
     <body>
         <%! int correcto;%>
-        <%
-            if (request.getAttribute("inicio") != null) {
-                correcto = Integer.parseInt(request.getAttribute("inicio").toString());
-
-                if (correcto == 0) {
-
-        %>
-        <h1>Datos de usuario incorrectos</h1>
-        <%                            }
-            }
-        %>
+        
 
         <section id="formulario">
             <div class="row">
@@ -52,6 +42,18 @@
                                     <input id="pass" type="password" name="pass" class="form-control" placeholder="contraseña">
 
                                 </div>
+                                
+                                <%
+                                    if (request.getAttribute("inicio") != null) {
+                                        correcto = Integer.parseInt(request.getAttribute("inicio").toString());
+
+                                        if (correcto == 0) {
+
+                                %>
+                                <h6 class="text-center py-4 font-bold font-up danger-text">Datos de usuario incorrectos</h6>
+                                <%                            }
+                                    }
+                                %>
 
                                 <div class="text-center">
                                     <input type="submit" value="Consultar" class="btn btn-primary">

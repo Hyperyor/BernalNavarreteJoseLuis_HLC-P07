@@ -59,15 +59,7 @@
                 updateCorrecto = "no";
             }
             
-            if(updateCorrecto.equals("no"))
-            {
-                %>
-                
-                <h1>Error al modificar</h1>
-                
-                <%
-                    
-            }
+            
 
             %>
         
@@ -103,6 +95,18 @@
                                     <input type="text" id="beneficio" name="beneficio" value="<%= t.getPorcentajeBeneficio() %>" class="form-control ">
 
                                 </div>
+                                    <%
+                                    if(updateCorrecto.equals("no"))
+                                    {
+                                        %>
+
+                                        <h6 class="text-center py-4 font-bold font-up danger-text">Error al modificar</h6>
+
+                                        <%
+
+                                    }
+                                    %>
+                                    
                                     
                                      <input class="btn btn-danger form-control" type="submit" value="Modificar">  
 
